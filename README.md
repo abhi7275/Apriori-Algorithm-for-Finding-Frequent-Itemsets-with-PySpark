@@ -10,54 +10,54 @@ Environment Setup:
 
 python
 
-import itertools
-import findspark
-findspark.init()
-import pyspark
-from pyspark.sql import *
-
-conf = pyspark.SparkConf().setAppName('Apriori').setMaster('local')
-sc = pyspark.SparkContext(conf=conf)
-spark = SparkSession(sc)
+    import itertools
+    import findspark
+    findspark.init()
+    import pyspark
+    from pyspark.sql import *
+    
+    conf = pyspark.SparkConf().setAppName('Apriori').setMaster('local')
+    sc = pyspark.SparkContext(conf=conf)
+    spark = SparkSession(sc)
 
 Algorithm Implementation:
-1. Generate Combinations - Parent Intersection Property
+1. **Generate Combinations - Parent Intersection Property**
 
     A pre-check function identifies potential combinations based on the parent intersection property.
 
-2. Generate Combinations - Subset Frequency Property
+2. **Generate Combinations - Subset Frequency Property**
 
     A post-check function filters combinations based on the subset frequency property.
 
-3. Count Check
+3. **Count Check**
 
     Check the count of filtered combinations against a support threshold.
 
-4. Generate k-Size Combinations
+4. **Generate k-Size Combinations**
 
     A generator function orchestrates the entire process for a given k.
 
-5. Generate Singles
+5. **Generate Singles**
 
     Identify single items that meet the support threshold.
 
-6. The Worker Partition Mapper
+6. **The Worker Partition Mapper**
 
     The apriori function serves as the worker node, executing the Apriori algorithm on a partition.
 
-7. Load Data and Preprocess
+7. **Load Data and Preprocess**
 
     Load data from the provided CSV file and preprocess it for analysis.
 
-8. The Distributed Transform
+8. **The Distributed Transform**
 
     Apply the apriori function to each partition of the dataset in a distributed manner.
 
-9. Auxiliary Function to Check Presence
+9. **Auxiliary Function to Check Presence**
 
     An auxiliary function checks the presence of combinations in each row.
 
-10. Count Check at Master
+10. **Count Check at Master**
 
     Check the count of filtered combinations at the master node.
 
